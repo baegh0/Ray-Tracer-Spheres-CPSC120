@@ -1,0 +1,17 @@
+name: A Docker-less workflow for CPSC 120
+on: push
+
+jobs:
+  build:
+    name: Lab actions for CPSC 120
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Check Header
+        run: bash .action/header_check.sh
+      - name: Compile Check Script
+        run: bash .action/compile_check.sh
+      - name: Install clang-tidy
+        run: sudo apt install -y clang-tidy >& /dev/null && echo "Installed clang-tidy!"
+      - name: Format Check Script
+        run: bash .action/format_check.sh
